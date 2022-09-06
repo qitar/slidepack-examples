@@ -1,16 +1,15 @@
-# slidepack-examples javascript ver
+# Generate PPTX with SlidePack (NodeJS sample code)
 
 ## Prerequisites
 
 * NodeJS >= 16
+* Sign up for free and create your API token at https://slidepack.io/app
 
 ## How To Use
 
 ```bash
-# generate API Token beforehand at web console(https://slidepack.io/apps)
+npm install
 export SLIDEPACK_API_TOKEN="xxxxxxx"
-
-# execute sample code
 node index.js
 # => generates output.pptx
 ```
