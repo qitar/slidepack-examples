@@ -1,0 +1,26 @@
+{
+  "name": "slidepack-example-nodejs",
+  "version": "1.0.0",
+  "description": "Sample code for generating PowerPoint presentations using SlidePack",
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qitar/slidepack-examples.git#main"
+  },
+  "author": "Qitar LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qitar/slidepack-examples/issues"
+  },
+  "homepage": "https://github.com/qitar/slidepack-examples/tree/main#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "form-data": "^4.0.0"
+  }
+}

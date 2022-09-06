@@ -1,1 +1,4 @@
-ruby/output.pptx
+output.pptx
+node_modules
+.env
+.vscode
