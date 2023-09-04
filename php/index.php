@@ -1,6 +1,12 @@
 <?php
 require 'vendor/autoload.php';
 
+$token = getenv('SLIDEPACK_API_TOKEN');
+
+if (!$token) {
+    exit('Please set SLIDEPACK_API_TOKEN environment variable.');
+}
+
 class SlidePackClient {
     private $endpoint;
     private $token;
@@ -93,17 +99,11 @@ class SlidePackClient {
     }
 }
 
-$token = getenv('SLIDEPACK_API_TOKEN');
-
-if (!$token) {
-    exit('Please set SLIDEPACK_API_TOKEN environment variable.');
-}
-
 $error = null;
 
 try {
     if (isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
-        $client = new SlidePackClient($token);
+        $client = new SlidePackClient($token, getenv('SLIDEPACK_API_ENDPOINT'));
         $session = $client->createSession();
         $client->uploadZip($session, $_FILES['file']['tmp_name']);
         $result = $client->render($session);
@@ -154,6 +154,7 @@ try {
             background: #fbfbfb;
             color: #333;
             line-height: 1.5;
+            font-family: sans-serif;
         }
 
         main {

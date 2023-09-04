@@ -1,5 +1,2 @@
 output.pptx
-node_modules
-php/vendor
-.env
 .vscode

@@ -5,11 +5,11 @@ let fs = require('fs');
 let FormData = require('form-data');
 
 let {
-  SLIDEPACK_API_TOKEN
+  SLIDEPACK_API_TOKEN,
+  SLIDEPACK_API_ENDPOINT = "https://slidepack.io"
 } = process.env;
 
-let SLIDEPACK_API_ENDPOINT = "https://slidepack.io";
-let input = './template.zip';
+let inputZip = './input.zip';
 let output = './output.pptx';
 
 (async function () {
@@ -26,13 +26,15 @@ let output = './output.pptx';
     });
 
     let session = sessionResponse.data;
+    console.log(`Created session ${session.session.uuid}\n`);
 
-    // Upload local zip file using multipart/form-data
+    // Upload local zip file using multipart/form-data.
+    // Use all values from session['sesssion']['upload'], then append the file field.
     let form = new FormData();
     for (let key in session.upload.params) {
       form.append(key, session.upload.params[key]);
     }
-    form.append('file', fs.createReadStream(input));
+    form.append('file', fs.createReadStream(inputZip));
     let length = await getFormDataLength(form);
 
     await axios({
@@ -45,6 +47,7 @@ let output = './output.pptx';
     }).catch(e => {
       throw Error(`ERROR: Failed to upload zip file: ${e.message}`, { cause: e });
     });
+    console.log(`Uploaded ${inputZip}\n`);
 
     // Render PowerPoint
     let renderResponse = await axios({
@@ -56,6 +59,7 @@ let output = './output.pptx';
     }).catch(e => {
       throw Error(`ERROR: Failed to render: ${e.message}`, { cause: e });
     });
+    console.log("Render response: ", renderResponse.data, "\n");
 
     // Download rendered pptx
     let downloadResponse = await axios({
@@ -64,8 +68,7 @@ let output = './output.pptx';
       responseType: 'stream',
     });
     downloadResponse.data.pipe(fs.createWriteStream(output));
-
-    console.log(`Rendered to ${output}`);
+    console.log(`Saved render output to ${output}`);
   } catch (e) {
     console.error(e.message);
   }

@@ -4,7 +4,7 @@ require 'uri'
 require 'net/http'
 require 'json'
 
-SLIDEPACK_API_ENDPOINT = 'https://slidepack.io'.freeze
+SLIDEPACK_API_ENDPOINT = ENV['SLIDEPACK_API_ENDPOINT'] || 'https://slidepack.io'.freeze
 
 def create_session(api_token)
   _post_request_with_json("#{SLIDEPACK_API_ENDPOINT}/sessions", api_token)
@@ -68,7 +68,7 @@ if __FILE__ == $PROGRAM_NAME
     exit(1)
   end
 
-  unless upload_zip_file(File.expand_path('./template.zip'), session_info)
+  unless upload_zip_file(File.expand_path('./input.zip'), session_info)
     STDERR.puts 'ERROR: failed to upload zip file.'
     exit(2)
   end
