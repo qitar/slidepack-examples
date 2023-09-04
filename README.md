@@ -1,6 +1,6 @@
 # Generating PowerPoint files with SlidePack: Sample Code
 
-This repository contains sample code that demonstrates how to generate PowerPoint presentations using [SlidePack](https://slidepack.io).
+This repository contains sample code that demonstrates how to generate PowerPoint presentations using [SlidePack](https://slidepack.io). SlidePack is a templating engine for PowerPoint presentations.
 
 Refer to instructions in the directory of your preferred language to get started.
 
